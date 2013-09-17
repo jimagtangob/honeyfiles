@@ -7,14 +7,19 @@ var express = require('express')
   , routes = require('../routes')
   , user = require('../routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , exphbs  = require('express3-handlebars');
 
 var app = express();
+var hbs = exphbs.create({
+  defaultLayout: 'main'
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '../views');
-app.set('view engine', 'ejs');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -27,7 +32,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+  res.render('login', { title: 'Express' });
+});
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
