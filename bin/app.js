@@ -17,9 +17,11 @@ var hbs = exphbs.create({
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '../views');
+// app.set('views', __dirname + '../views');
+// app.set('view engine', 'ejs');
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
