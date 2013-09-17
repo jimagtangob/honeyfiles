@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+var models = require('../lib/server/models');
+var argv = require('optimist').argv;
+
+var setupUser = function(username, pass) {
+  console.log("[-] Adding a default user: ", username);
+  models.User.add({
+    username: username,
+    password: pass,
+    email: argv.email || 'test@example.com'
+  }, function(err, user) {
+    if (err) throw err;
+    console.log("[-]", username, "created");
+  });
+};
+
+if (argv.user && argv.pass) setupUser(argv.user, argv.pass);
