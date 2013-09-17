@@ -37,6 +37,20 @@ app.get('/', function(req, res){
 });
 app.get('/users', user.list);
 
+app.get("/fetch/ip", function(req, res) {
+  var ip_address = null;
+  if(req.headers['x-forwarded-for']){
+    ip_address = req.headers['x-forwarded-for'];
+  } else {
+    ip_address = req.connection.remoteAddress;
+  };
+
+  res.json({
+    ip: ip_address
+  });
+});
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
