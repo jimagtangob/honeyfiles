@@ -1,22 +1,56 @@
 var HoneyFiles = {
 
+  fetch: {
+    ajax: {},
+
+    createCampaign: function(name, callback) {
+      var self = this; 
+
+      if (self.ajax.createCampaign) {
+        self.ajax.createCampaign.abort();
+      };
+
+      self.ajax.createCampaign = $.ajax({
+        url: "/api/campaigns/",
+        type: "post",
+        dataType: "json",
+        data: {
+          name: name
+        },
+        success: function(data) {
+          if (callback && typeof callback === "function") {
+            callback(data);
+          };
+        }
+      });
+    },
+  
+  },
+
   init: function() {
     var self = this; 
 
     $(document).on('click', 'a.create-new-campaign', function(e) {
       e.preventDefault();
 
-      var box = self.render.popup('new-campaign', {
-        title: "Revoke Firewall Access Lease",
-        message: "Are you sure you want to revoke this firewall access lease?. All communications to this port for the supplied source with be terminated.",
-        button: {
-          title: "Yes, Revoke It.",
-          type: "warning"
-        },
-        icon: "remove"
-      }, {
+      var box = self.render.popup('new-campaign', {}, {
         onAction: function() {
-          $.limpClose();
+          var errors = 0;
+          var name = $('input#campaign-name');
+
+          if (name.val().length <= 0) {
+            errors++;
+            name.addClass('error');
+          };
+
+          if (errors <= 0) {
+            $.limpClose();
+
+            self.fetch.createCampaign(name.val(), function(data) {
+              console.log(data);
+            });
+          };
+
         }
       });
 

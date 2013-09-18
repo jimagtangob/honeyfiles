@@ -1,0 +1,33 @@
+<div class="popup-box">
+
+  <div class='popup-box-title'>
+    <i class='icon-{{icon}}'></i>
+    {{title}}
+  </div>
+
+  <div class="popup-box-content">
+
+    <p class='popup-box-text'>
+    {{{message}}}
+    </p>
+
+  </div>
+
+  <div class="popup-box-footer">
+
+    <div class='form-actions'>
+
+      {{#if button}}
+      <button class='button {{button.type}} limp-action'>{{button.title}}</button>
+      {{/if}}
+
+      {{#if ignore_cancel}}
+      {{else}}
+      <button class='button' onClick='$.limpClose()'>Cancel</button>
+      {{/if}}
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,14 +1,19 @@
 <div class="popup-box">
 
   <div class='popup-box-title'>
-    <i class='icon-{{icon}}'></i>
-    {{title}}
+    <i class='icon-plus'></i>
+    New Campaign
   </div>
 
   <div class="popup-box-content">
 
     <p class='popup-box-text'>
-    {{{message}}}
+
+      <div class="form-group">
+        <label for="new-campaign">Campaign Name</label><br />
+        <input placeholder="Dropbox Files" id="campaign-name" class='dark' type="text" name="new-campaign">
+      </div>
+
     </p>
 
   </div>
@@ -16,16 +21,8 @@
   <div class="popup-box-footer">
 
     <div class='form-actions'>
-
-      {{#if button}}
-      <button class='button {{button.type}} limp-action'>{{button.title}}</button>
-      {{/if}}
-
-      {{#if ignore_cancel}}
-      {{else}}
+      <button class='button default limp-action'>Create Campaign</button>
       <button class='button' onClick='$.limpClose()'>Cancel</button>
-      {{/if}}
-
     </div>
 
   </div>

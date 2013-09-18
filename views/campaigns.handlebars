@@ -14,3 +14,17 @@
   </div>
 
 </div>
+
+
+<div class="data">
+
+  {{#campaigns}}
+
+  <div class="campaign" data-id="{{id}}" data-enabled="{{enabled}}">
+    <div class="name">{{name}}</div>
+    <div class="timestamp">{{createdAt}}</div>
+  </div>
+
+  {{/campaigns}}
+
+</div>
