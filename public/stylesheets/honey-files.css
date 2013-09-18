@@ -1927,14 +1927,17 @@ li{
 
 html, body{
 	color: #fff;
+ 	-webkit-font-smoothing: antialiased;
+	font: 1.0em 'Lato', Calibri, Arial, sans-serif;
+	font-weight: normal;
+}
+
+body{
 	/*background-color: #435A6B;*/
 	/*background-color: #1594c2;*/
 	/*background-color: #1f9a53;*/
 	background-color: #b84847;
 	/*background-color: #274EC9;*/
- 	-webkit-font-smoothing: antialiased;
-	font: 1.0em 'Lato', Calibri, Arial, sans-serif;
-	font-weight: normal;
 }
 
 .no-padding{

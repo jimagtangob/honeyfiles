@@ -5,10 +5,37 @@
     <title>Honey Files by Threat Stack, Inc</title>
 
     <link rel='stylesheet' href='/stylesheets/honey-files.css' />
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/color.js"></script>
 </head>
 <body>
 
     {{{body}}}
 
+    <script>
+      var items = [
+        '#435A6B',
+        '#1594c2',
+        '#1f9a53',
+        '#b84847',
+        '#274EC9'
+      ];
+
+      var changeColor = function(color) {
+        $('body').animate({
+          backgroundColor: color
+        }, 2000, function() {
+          var newColor = items[Math.floor(Math.random()*items.length)];
+          setTimeout(function() {
+            changeColor(newColor);
+          }, 3000);
+        });
+      };
+
+      setTimeout(function() {
+        changeColor(items[Math.floor(Math.random()*items.length)]);
+      }, 3000);
+
+    </script>
 </body>
 </html>
