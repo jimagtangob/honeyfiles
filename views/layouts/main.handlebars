@@ -34,7 +34,8 @@
         </li>
 
         <li class='header-menu-item'>
-          <a href="/logout" data-method="post" rel="nofollow">Logout</a>
+          <form action="/logout" method="post" id="logout">
+          <a href="#" data-method="post" rel="nofollow" onclick="document.getElementById('logout').submit();">Logout</a>
         </li>
       </ul>
     </div>
