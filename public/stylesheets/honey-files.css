@@ -1751,12 +1751,13 @@ a .icon-flip-vertical:before {
 
 input[type="text"], textarea, select{
   display: inline-block;
-  width: 220px;
-  padding: 5px;
-  font-size: 12px;
-  color: #555;
-  border: 1px solid #CCC;
-
+  width: 370px;
+  padding: 5px 10px;
+  color: #000;
+  border: 1px solid rgba(0,0,0,0.7);
+	font-size: 1.3em;
+	background-color: #fff8fd;
+	margin-top: 5px;
 }
 
 input[type='text'].dark,
@@ -1785,7 +1786,7 @@ textarea.dark {
 }
 
 input:focus, textarea:focus{
-  border: 1px solid #000;
+  border: 1px solid rgba(0,0,0,0.5);
   -webkit-box-shadow: 0px 0px 20px rgba(255,255,255,0.6) !important;
   -moz-box-shadow: 0px 0px 20px rgba(255,255,255,0.6) !important;
   box-shadow: 0px 0px 20px rgba(255,255,255,0.6) !important;
@@ -1794,6 +1795,22 @@ input:focus, textarea:focus{
 input.dark.error,
 textarea.dark.error{
 	border: 1px solid #bf2b17 !important;
+}
+
+.form-group{
+	margin-bottom: 10px;
+}
+
+.form-group label{
+	display: block;
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.form-actions{
+	display: block;
+	position: relative;
+	margin-top: 20px;
 }
 
 /* @end */
@@ -2421,7 +2438,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 	display: block;
 	position: relative;
 	width: 980px;
-	min-height: 300px;
+	min-height: 100px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -2691,6 +2708,13 @@ div.data{
 	padding: 5px;
 }
 
+div.data.more{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	padding: 20px;
+}
+
 div.campaign{
 	cursor: pointer;
 	display: block;
@@ -2699,12 +2723,12 @@ div.campaign{
 	line-height: 45px;
 	
 	background-color: transparent !important;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(31, 32, 37, 0.50)), to(rgba(0, 0, 0, 0.50)));
-	background-image: -webkit-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.50));
-	background-image: -moz-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.50));
-	background-image: -o-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.50));
-	background-image: -ms-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.50));
-	background-image: linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.50));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(31, 32, 37, 0.20)), to(rgba(0, 0, 0, 0.35)));
+	background-image: -webkit-linear-gradient(top, rgba(31, 32, 37, 0.20), rgba(0, 0, 0, 0.35));
+	background-image: -moz-linear-gradient(top, rgba(31, 32, 37, 0.20), rgba(0, 0, 0, 0.35));
+	background-image: -o-linear-gradient(top, rgba(31, 32, 37, 0.20), rgba(0, 0, 0, 0.35));
+	background-image: -ms-linear-gradient(top, rgba(31, 32, 37, 0.20), rgba(0, 0, 0, 0.35));
+	background-image: linear-gradient(top, rgba(31, 32, 37, 0.20), rgba(0, 0, 0, 0.35));
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#1f2025', EndColorStr='#000000');
 	
       -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -2725,12 +2749,12 @@ div.campaign a{
 
 div.campaign:hover{
 	background-color: transparent !important;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(31, 32, 37, 0.40)), to(rgba(0, 0, 0, 0.40)));
-	background-image: -webkit-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.40));
-	background-image: -moz-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.40));
-	background-image: -o-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.40));
-	background-image: -ms-linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.40));
-	background-image: linear-gradient(top, rgba(31, 32, 37, 0.50), rgba(0, 0, 0, 0.40));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(31, 32, 37, 0.30)), to(rgba(0, 0, 0, 0.40)));
+	background-image: -webkit-linear-gradient(top, rgba(31, 32, 37, 0.30), rgba(0, 0, 0, 0.40));
+	background-image: -moz-linear-gradient(top, rgba(31, 32, 37, 0.30), rgba(0, 0, 0, 0.40));
+	background-image: -o-linear-gradient(top, rgba(31, 32, 37, 0.30), rgba(0, 0, 0, 0.40));
+	background-image: -ms-linear-gradient(top, rgba(31, 32, 37, 0.30), rgba(0, 0, 0, 0.40));
+	background-image: linear-gradient(top, rgba(31, 32, 37, 0.30), rgba(0, 0, 0, 0.40));
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#1f2025', EndColorStr='#000000');	
 }
 

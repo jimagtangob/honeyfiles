@@ -47,12 +47,17 @@ if ('development' == app.get('env')) {
 
 app.get('/', server.auth.required, routes.index);
 app.get('/login', routes.login);
+app.get('/login', routes.login);
 app.post('/logout', server.auth.logout);
 app.get('/users', user.list);
 
 app.get('/campaigns', server.auth.required, routes.campaign.index);
+app.get('/campaigns/new', server.auth.required, routes.campaign.create);
+app.post('/campaigns/create', server.auth.required, routes.campaign.doCreate);
 app.get('/campaigns/:id', server.auth.required, routes.campaign.get);
 
+app.get('/settings', server.auth.required, routes.settings.index);
+app.get('/audit-logs', server.auth.required, routes.audit.index);
 
 // app.get('/api/campaigns/testCreate', server.auth.required, routes.campaign.api.testCreate);
 // app.get('/api/campaigns/:id/testCreateDocument', server.auth.required, routes.campaign.api.testCreateDocument);
