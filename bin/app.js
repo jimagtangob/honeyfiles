@@ -9,15 +9,24 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , config = require('../config')
-  , server = require('../lib/server');
+  , server = require('../lib/server')
+  , exphbs  = require('express3-handlebars')
+  , helpers = require('../lib/helpers');
 
 var passport = require('passport');
 var app = express();
+var hbs = exphbs.create({
+  defaultLayout: 'main',
+  helpers: helpers
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '../views');
-app.set('view engine', 'ejs');
+// app.set('views', __dirname + '../views');
+// app.set('view engine', 'ejs');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -27,7 +36,8 @@ app.use(express.session({ secret: 'afsjljX)FJfejejneX' }));  // XXX: not hardcod
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public/'));
 
 // development only
 if ('development' == app.get('env')) {
@@ -35,6 +45,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/login', routes.login);
 app.get('/users', user.list);
 
 app.get('/fetch/ip', function(req, res) {
