@@ -1910,6 +1910,15 @@ button:hover, button.hover{
 
 /* @group Main */
 
+a,
+#footer,
+li{
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
 * {
 	-moz-box-sizing: border-box; 
 	-webkit-box-sizing: border-box; 
@@ -1918,7 +1927,11 @@ button:hover, button.hover{
 
 html, body{
 	color: #fff;
-	background: #415164;
+	/*background-color: #435A6B;*/
+	/*background-color: #1594c2;*/
+	/*background-color: #1f9a53;*/
+	background-color: #b84847;
+	/*background-color: #274EC9;*/
  	-webkit-font-smoothing: antialiased;
 	font: 1.0em 'Lato', Calibri, Arial, sans-serif;
 	font-weight: normal;
@@ -1958,7 +1971,6 @@ html, body{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: #415164;
 	
 	-webkit-background-size: 100px 100px;
 	-moz-background-size: 100px 100px;
@@ -2203,6 +2215,11 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 	top: 0;
 	right: 0;
 	bottom: 0;
+}
+
+#header .inside .header-menu span.username{
+	text-transform: capitalize;
+	font-weight: 900;
 }
 
 #header .inside .header-menu ul{
