@@ -1918,7 +1918,7 @@ button:hover, button.hover{
 
 html, body{
 	color: #fff;
-	background: #1594c2;
+	background: #415164;
  	-webkit-font-smoothing: antialiased;
 	font: 1.0em 'Lato', Calibri, Arial, sans-serif;
 	font-weight: normal;
@@ -1958,7 +1958,7 @@ html, body{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	/*background-color: #3B4144;*/
+	background-color: #415164;
 	
 	-webkit-background-size: 100px 100px;
 	-moz-background-size: 100px 100px;
@@ -2133,7 +2133,31 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
   -ms-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
   -moz-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
   box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+	display: block;
+	position: relative;
 }
+
+/*#login .login-box div.frost{
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background-color: rgba(212,251,255,0.2);
+	-webkit-filter: blur(30px);  
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    
+     -webkit-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+  -o-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+  -ms-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+  -moz-box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba( 0,0,0,0.3), 0px 2px 0px rgba( 255,255,255,0.10), inset 0 1px 0 rgba( 255,255,255,0.12);
+	overflow: hidden;
+}*/
 
 /* @end */
 
@@ -2160,8 +2184,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 	height: 85px;
 	display: inline-block;
 	position: relative;
-	font-size: 3.0em;
 	color: #fff;
+	font-size: 3.1em;
 }
 
 #header .inside .header-title span.first{
@@ -2253,14 +2277,22 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 
 #menu ul{
 	width: 980px;
-	margin: auto;
 	height: 35px;
 	line-height: 35px;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin: auto;
+	position: relative;
 }
 
 #menu ul li{
 	display: inline-block;
 	margin-right: 40px;
+}
+
+#menu ul li:hover{
+	border-bottom: 3px solid rgba(254,255,255,0.32);
 }
 
 #menu ul li a{
