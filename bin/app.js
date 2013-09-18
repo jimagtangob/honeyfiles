@@ -8,7 +8,6 @@ var express = require('express')
   , user = require('../routes/user')
   , http = require('http')
   , path = require('path')
-  , config = require('../config')
   , server = require('../lib/server')
   , exphbs  = require('express3-handlebars')
   , helpers = require('../lib/helpers');
@@ -47,9 +46,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', server.auth.required, routes.index);
 app.get('/login', routes.login);
-app.get('/login', routes.login);
 app.post('/logout', server.auth.logout);
-app.get('/users', user.list);
+// app.get('/users', user.list);
 
 app.get('/campaigns', server.auth.required, routes.campaign.index);
 // app.get('/campaigns/create', server.auth.required, routes.campaign.create);
@@ -86,12 +84,19 @@ app.get('/fetch/ip', function(req, res) {
 app.post('/login', server.auth.login);
 
 server.auth.setup(app);
-server.honeypot.addUrls(app, function() {
 
-  http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+server.config.on('ready', function() {
+
+  server.honeypot.addUrls(app, function() {
+
+    http.createServer(app).listen(app.get('port'), function(){
+      console.log('Express server listening on port ' + app.get('port'));
+    });
+
   });
 
 });
+
+server.config.load();
 
 
