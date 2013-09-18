@@ -156,7 +156,7 @@ api.downloadDocument = function(req, res) {
   req.connection.setTimeout(60000 * 10);
 
   models.Document
-    .find({ where: ['id = ? and CampaignId = ?', req.params.document_id, req.params.id ] })
+   .find({ where: ['id = ? and CampaignId = ?', req.params.document_id, req.params.id ] })
    .success(function(document) { 
 
      if (!document) return res.send(404);
