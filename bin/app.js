@@ -53,7 +53,8 @@ app.get('/campaigns', server.auth.required, routes.campaign.index);
 app.get('/campaigns/:id', server.auth.required, routes.campaign.get);
 
 
-app.get('/api/campaigns/testCreate', server.auth.required, routes.campaign.api.testCreate);
+// app.get('/api/campaigns/testCreate', server.auth.required, routes.campaign.api.testCreate);
+// app.get('/api/campaigns/:id/testCreateDocument', server.auth.required, routes.campaign.api.testCreateDocument);
 app.get('/api/campaigns', server.auth.required, routes.campaign.api.list);
 app.get('/api/campaigns/:id', server.auth.required, routes.campaign.api.get);
 app.post('/api/campaigns', server.auth.required, routes.campaign.api.create);
@@ -62,7 +63,6 @@ app.get('/api/campaigns/:id/documents', server.auth.required, routes.campaign.ap
 app.get('/api/campaigns/:id/documents/:document_id', server.auth.required, routes.campaign.api.getDocument);
 app.get('/api/campaigns/:id/documents/:document_id/views', server.auth.required, routes.document.api.listDocumentViews);
 app.get('/api/campaigns/:id/documents/:document_id/download', server.auth.required, routes.campaign.api.downloadDocument);
-app.get('/api/campaigns/:id/testCreateDocument', server.auth.required, routes.campaign.api.testCreateDocument);
 
 app.get('/fetch/ip', function(req, res) {
   var ip_address = null;

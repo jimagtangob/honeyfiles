@@ -1,5 +1,21 @@
 var models = require('../lib/server/models');
 
+function get(req, res, next) {
+
+   models.Campaign
+   .find({ id: req.params.id })
+   .success(function(campaign) { 
+     
+     if (!campaign) return res.send(404);
+     if (next) return next(campaign);
+     res.send({ status: 'success', campaign: campaign })
+   })
+   .error(function(err) {
+      console.error("unable to list campaign", err);
+      return res.send(500);
+   })
+
+}
 function create(options, callback) {
 
   if (!options.name) 
@@ -15,9 +31,54 @@ function create(options, callback) {
     callback(null, campaign); 
   })
   .error(callback);
-
 };
 
+function list(req, res, next) {
+
+  var filter = {};
+
+  if (req.query.enabled) {
+    filter.enabled = true; 
+  };
+
+  models.Campaign
+   .findAll(filter)
+   .success(function(campaigns) { 
+     if (next) { return next(campaigns); }
+     res.send({ status: 'success', campaigns: campaigns });
+   })
+   .error(function(err) {
+     console.error("unable to list campaigns", err);
+      return res.send(500);
+   })
+};
+
+function listDocuments(req, res, next) {
+
+  models.Campaign
+  .find({ id: req.params.id })
+  .success(function(campaign) { 
+
+    if (!campaign) {
+     console.error("no campaign found", req.params.id);
+     return res.send(404);
+    }
+
+    campaign.getDocuments()
+    .success(function(documents) {
+      if (next) return next(campaign, documents);
+      res.send({ status: 'success', documents: documents })
+    })
+    .error(function(err) { 
+      console.error("unable to list documents", err);
+      return res.send(500);
+    });
+   })
+   .error(function(err) {
+      console.error("unable to fetch campaign", err);
+      return res.send(500);
+   });
+};
 
 
 var api = {};
@@ -44,40 +105,12 @@ api.create = function(req, res) {
 
 };
 
-api.list = function(req, res, next) {
-
-  var filter = {};
-
-  if (req.query.enabled) {
-    filter.enabled = true; 
-  };
-
-  models.Campaign
-   .findAll(filter)
-   .success(function(campaigns) { 
-     if (next) return next(campaigns);
-     res.send({ status: 'success', campaigns: campaigns });
-   })
-   .error(function(err) {
-     console.error("unable to list campaigns", err);
-      return res.send(500);
-   })
+api.list = function(req, res) {
+  list(req, res);
 };
 
-api.get = function(req, res, next) {
-
-   models.Campaign
-   .find({ id: req.params.id })
-   .success(function(campaign) { 
-     
-     if (!campaign) return res.send(404);
-     if (next) return next(campaign);
-     res.send({ status: 'success', campaign: campaign })
-   })
-   .error(function(err) {
-      console.error("unable to list campaign", err);
-      return res.send(500);
-   })
+api.get = function(req, res) {
+  get(req, res);
 };
 
 api.getDocument = function(req, res) {
@@ -98,29 +131,9 @@ api.getDocument = function(req, res) {
 };
 
 
-api.listDocuments = function(req, res, next) {
+api.listDocuments = function(req, res) {
 
-  models.Campaign
-   .find({ id: req.params.id })
-   .success(function(campaign) { 
-
-     if (!campaign) return res.send(404);
-
-     campaign.getDocuments()
-     .success(function(documents) {
-       if (next) return next(campaign, documents);
-       res.send({ status: 'success', documents: documents })
-     })
-     .error(function(err) { 
-       console.error("unable to list documents", err);
-       return res.send(500);
-     });
-   })
-   .error(function(err) {
-      console.error("unable to fetch campaign", err);
-      return res.send(500);
-   });
-
+  return listDocuments(req, res);
 };
 
 api.downloadDocument = function(req, res) {
@@ -205,8 +218,9 @@ api.testCreateDocument = function(req, res) {
 
 exports.api = api;
 
+
 exports.index = function(req, res) {
-  api.list(req, res, function(campaigns) {
+  list(req, res, function(campaigns) {
     res.render('campaigns', {
       title: '',
       campaigns: campaigns
@@ -216,12 +230,22 @@ exports.index = function(req, res) {
 
 
 exports.get = function(req, res) {
-  api.listDocuments(req, res, function(campaign, documents) {
-    res.render('campaigns', {
-      title: '',
-      campaign: campaign,
-      documents: documents
-    });
+  listDocuments(req, res, function(campaign, documents) {
+    campaign.stats(function(err, stats) {
+      
+      if (err) {
+        console.error("error getting campaign", err);
+        return res.send(500);
+      };
+
+      res.render('campaigns', {
+        title: '',
+        stats: stats,
+        campaign: campaign,
+        documents: documents
+      }); 
+    })
+   
   });
 };
 
