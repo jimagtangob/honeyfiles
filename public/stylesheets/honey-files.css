@@ -2203,6 +2203,14 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 	font-size: 3.1em;
 }
 
+#header .inside .header-title a{
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	color: #fff;
+}
+
 #header .inside .header-title span.first{
 	font-weight: 700;
 	color: #fff;

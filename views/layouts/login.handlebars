@@ -13,6 +13,7 @@
     {{{body}}}
 
     <script>
+
       var items = [
         '#435A6B',
         '#1594c2',
@@ -22,19 +23,22 @@
       ];
 
       var changeColor = function(color) {
-        $('body').animate({
+        $('body').stop().animate({
           backgroundColor: color
-        }, 2000, function() {
+        }, 1000, function() {
           var newColor = items[Math.floor(Math.random()*items.length)];
+          while (newColor === color) {
+            var newColor = items[Math.floor(Math.random()*items.length)];
+          };
           setTimeout(function() {
             changeColor(newColor);
-          }, 3000);
+          }, 2000);
         });
       };
 
       setTimeout(function() {
         changeColor(items[Math.floor(Math.random()*items.length)]);
-      }, 3000);
+      }, 1000);
 
     </script>
 </body>
