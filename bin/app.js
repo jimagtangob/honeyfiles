@@ -39,12 +39,13 @@ app.use(app.router);
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/'));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', server.auth.required, routes.index);
 app.get('/login', routes.login);
 app.get('/users', user.list);
 
@@ -62,10 +63,9 @@ app.get('/fetch/ip', function(req, res) {
 });
 
 app.post('/login', server.auth.login);
-app.get('/login', server.auth.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-server.auth.setup();
+server.auth.setup(app);

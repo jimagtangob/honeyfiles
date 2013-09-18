@@ -25,6 +25,8 @@
     "underscore": "~1.5.2",
     "debug": "~0.7.2",
     "rimraf": "~2.2.2",
-    "easy-zip": "0.0.4"
+    "easy-zip": "0.0.4",
+    "uuid": "~1.4.1",
+    "node-uuid": "~1.4.1"
   }
 }

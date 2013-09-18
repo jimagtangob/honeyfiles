@@ -1,0 +1,10 @@
+{
+  "development": {
+    "host": "http://localhost",
+    "uri": "/files"
+  },
+
+  "production": {
+  
+  }
+}
