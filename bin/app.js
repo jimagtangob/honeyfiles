@@ -49,6 +49,9 @@ app.get('/', server.auth.required, routes.index);
 app.get('/login', routes.login);
 app.get('/users', user.list);
 
+app.get('/campaigns', server.auth.required, routes.campaign.index);
+app.get('/campaigns/:id', server.auth.required, routes.campaign.get);
+
 
 app.get('/api/campaigns/testCreate', server.auth.required, routes.campaign.api.testCreate);
 app.get('/api/campaigns', server.auth.required, routes.campaign.api.list);

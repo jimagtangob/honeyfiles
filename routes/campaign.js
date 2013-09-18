@@ -44,7 +44,7 @@ api.create = function(req, res) {
 
 };
 
-api.list = function(req, res) {
+api.list = function(req, res, next) {
 
   var filter = {};
 
@@ -54,18 +54,24 @@ api.list = function(req, res) {
 
   models.Campaign
    .findAll(filter)
-   .success(function(campaigns) { res.send({ status: 'success', campaigns: campaigns })})
+   .success(function(campaigns) { 
+     if (next) return next(campaigns);
+     res.send({ status: 'success', campaigns: campaigns });
+   })
    .error(function(err) {
      console.error("unable to list campaigns", err);
       return res.send(500);
    })
 };
 
-api.get = function(req, res) {
+api.get = function(req, res, next) {
 
    models.Campaign
    .find({ id: req.params.id })
    .success(function(campaign) { 
+     
+     if (!campaign) return res.send(404);
+     if (next) return next(campaign);
      res.send({ status: 'success', campaign: campaign })
    })
    .error(function(err) {
@@ -92,7 +98,7 @@ api.getDocument = function(req, res) {
 };
 
 
-api.listDocuments = function(req, res) {
+api.listDocuments = function(req, res, next) {
 
   models.Campaign
    .find({ id: req.params.id })
@@ -102,6 +108,7 @@ api.listDocuments = function(req, res) {
 
      campaign.getDocuments()
      .success(function(documents) {
+       if (next) return next(campaign, documents);
        res.send({ status: 'success', documents: documents })
      })
      .error(function(err) { 
@@ -196,6 +203,29 @@ api.testCreateDocument = function(req, res) {
   exports.api.createDocument(req, res);
 }
 
-
 exports.api = api;
+
+exports.index = function(req, res) {
+  api.list(req, res, function(campaigns) {
+    res.render('campaigns', {
+      title: '',
+      campaigns: campaigns
+    });
+  });
+};
+
+
+exports.get = function(req, res) {
+  api.listDocuments(req, res, function(campaign, documents) {
+    res.render('campaigns', {
+      title: '',
+      campaign: campaign,
+      documents: documents
+    });
+  });
+};
+
+
+
+
 
