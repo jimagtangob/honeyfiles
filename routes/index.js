@@ -4,9 +4,11 @@
  */
 
 exports.index = function(req, res){
+  
   res.render('index', { 
     title: 'Honey File by Threat Stack, Inc',
     layout: 'main'
+
   });
 };
 
@@ -20,3 +22,5 @@ exports.login = function(req, res){
 
 exports.campaign = require('./campaign');
 exports.document = require('./document');
+exports.audit = require('./audit');
+exports.settings = require('./settings');

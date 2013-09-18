@@ -1,4 +1,6 @@
 var models = require('../lib/server/models');
+var async = require('async');
+var _ = require('underscore');
 
 function get(req, res, next) {
 
@@ -44,8 +46,21 @@ function list(req, res, next) {
   models.Campaign
    .findAll(filter)
    .success(function(campaigns) { 
-     if (next) { return next(campaigns); }
-     res.send({ status: 'success', campaigns: campaigns });
+
+     var result = [];
+
+     async.each(campaigns, function(campaign, cb) {
+        campaign.stats(function(err, stats) {
+          if (err) return cb(err);
+          var v = campaign.values;
+          v.stats = stats;
+          result.push(v)
+          cb();
+        });
+     }, function(err) {
+       if (next) { return next(result); }
+       res.send({ status: 'success', campaigns: result });
+     })
    })
    .error(function(err) {
      console.error("unable to list campaigns", err);
@@ -116,7 +131,7 @@ api.get = function(req, res) {
 api.getDocument = function(req, res) {
 
   models.Document
-   .find({ id: req.params.document_id, CampaignId:  req.params.id })
+   .find({ where: ['id = ? and CampaignId = ?', req.params.document_id, req.params.id ] })
    .success(function(document) { 
 
      if (!document) return res.send(404);
@@ -141,10 +156,12 @@ api.downloadDocument = function(req, res) {
   req.connection.setTimeout(60000 * 10);
 
   models.Document
-   .find({ id: req.params.document_id, CampaignId:  req.params.id })
+    .find({ where: ['id = ? and CampaignId = ?', req.params.document_id, req.params.id ] })
    .success(function(document) { 
 
      if (!document) return res.send(404);
+
+     console.log("XXX FOUND", document.values)
 
      document.download(function(err, data) {
 
@@ -219,6 +236,24 @@ api.testCreateDocument = function(req, res) {
 exports.api = api;
 
 
+exports.create = function(req, res) {
+  res.render('campaigns/create', {
+    title: 'Create a Campaign'
+  });
+};
+
+exports.doCreate = function(req, res) {
+
+  var options = {};
+  options.name = req.body.name; 
+  options.user = req.user;
+
+  create(options, function(err) {
+    if (err) return res.send(500, err); // TODO: show erros 
+    res.redirect("/campaigns");
+  })
+};
+
 exports.index = function(req, res) {
   list(req, res, function(campaigns) {
     res.render('campaigns', {
@@ -238,9 +273,12 @@ exports.get = function(req, res) {
         return res.send(500);
       };
 
+      campaign = campaign.values;
+
+      campaign.stats = stats;
+
       res.render('campaigns', {
         title: '',
-        stats: stats,
         campaign: campaign,
         documents: documents
       }); 
