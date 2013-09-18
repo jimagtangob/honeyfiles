@@ -2,15 +2,75 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Example App</title>
+    <title>Honey Files by Threat Stack, Inc</title>
 
     <link rel='stylesheet' href='/stylesheets/honey-files.css' />
     <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/filter.js"></script>
+    <script src="/javascripts/lodash.js"></script>
+    <script src="/javascripts/limp.js"></script>
+    <script src="/javascripts/handlebars.js"></script>
     <script src="/javascripts/honey-files.js"></script>
 </head>
 <body>
 
+<div id="header">
+  <div class="inside">
+    <div class="header-title">
+      <span class='first'>Honey</span><span class='second'>Files</span>
+    </div>
+
+    <div class="header-menu">
+      <ul>
+        <li>
+          Welcome, User
+        </li>
+
+        <li class='header-menu-item'>
+          <a href="#">Settings</a>
+        </li>
+
+        <li class='header-menu-item'>
+          <a href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="menu">
+  <ul>
+    <li class='menu-item'>
+    <a href="#">Dashboard</a>
+    </li>
+
+    <li class='menu-item'>
+    <a href="#">Campaigns</a>
+    </li>
+
+    <li class='menu-item'>
+    <a href="#">Audit Logs</a>
+    </li>
+
+    <li class='menu-item'>
+    <a href="#">Settings</a>
+    </li>
+  </ul>
+</div>
+
+<div id="wrapper">
+
+  <div class="content">
     {{{body}}}
+  </div>
+
+</div>
+
+<div id="footer">
+  HoneyFiles by Threat Stack, Inc - Honey Files is Open Source Software.<br />
+  <a href="https://www.threatstack.com">https://www.threatstack.com</a> | 
+  <a href="https://github.com/threatstack/honeyfiles">https://www.github.com/threatstack/honeyfiles</a>
+</div>
 
 </body>
 </html>

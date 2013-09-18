@@ -8,11 +8,13 @@ var express = require('express')
   , user = require('../routes/user')
   , http = require('http')
   , path = require('path')
-  , exphbs  = require('express3-handlebars');
+  , exphbs  = require('express3-handlebars')
+  , helpers = require('../lib/helpers');
 
 var app = express();
 var hbs = exphbs.create({
-  defaultLayout: 'main'
+  defaultLayout: 'main',
+  helpers: helpers
 });
 
 // all environments
@@ -35,9 +37,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res){
-  res.render('login', { title: 'Express' });
-});
+app.get('/', routes.index);
+app.get('/login', routes.login);
 app.get('/users', user.list);
 
 app.get("/fetch/ip", function(req, res) {
