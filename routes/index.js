@@ -17,3 +17,5 @@ exports.login = function(req, res){
     layout: 'login'
   });
 };
+
+exports.campaign = require('./campaign');

@@ -37,6 +37,7 @@ function normalize(config) {
     throw "you must configure 'uri' and 'host' in config.json.  run ./bin/setup"
   }
 
+  return config;
 }
 module.exports = normalize(configuration);
 
