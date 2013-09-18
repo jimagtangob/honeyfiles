@@ -57,6 +57,7 @@ app.post('/api/campaigns', server.auth.required, routes.campaign.api.create);
 app.post('/api/campaigns/:id/documents', server.auth.required, routes.campaign.api.createDocument);
 app.get('/api/campaigns/:id/documents', server.auth.required, routes.campaign.api.listDocuments);
 app.get('/api/campaigns/:id/documents/:document_id', server.auth.required, routes.campaign.api.getDocument);
+app.get('/api/campaigns/:id/documents/:document_id/views', server.auth.required, routes.document.api.listDocumentViews);
 app.get('/api/campaigns/:id/documents/:document_id/download', server.auth.required, routes.campaign.api.downloadDocument);
 app.get('/api/campaigns/:id/testCreateDocument', server.auth.required, routes.campaign.api.testCreateDocument);
 

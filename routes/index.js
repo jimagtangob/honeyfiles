@@ -19,3 +19,4 @@ exports.login = function(req, res){
 };
 
 exports.campaign = require('./campaign');
+exports.document = require('./document');
