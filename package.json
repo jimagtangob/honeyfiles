@@ -16,6 +16,15 @@
     "sqlite3": "~2.1.17",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "fs-extra": "~0.6.4",
+    "unzip": "~0.1.9",
+    "glob": "~3.2.6",
+    "adm-zip": "~0.4.3",
+    "async": "~0.2.9",
+    "underscore": "~1.5.2",
+    "debug": "~0.7.2",
+    "rimraf": "~2.2.2",
+    "easy-zip": "0.0.4"
   }
 }
