@@ -47,6 +47,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', server.auth.required, routes.index);
 app.get('/login', routes.login);
+app.post('/logout', server.auth.logout);
 app.get('/users', user.list);
 
 app.get('/campaigns', server.auth.required, routes.campaign.index);
