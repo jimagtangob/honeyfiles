@@ -238,7 +238,7 @@ exports.get = function(req, res) {
         return res.send(500);
       };
 
-      res.render('campaigns', {
+      res.render('view-campaign', {
         title: '',
         stats: stats,
         campaign: campaign,
