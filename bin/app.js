@@ -59,9 +59,13 @@ app.get('/audit-logs', server.auth.required, routes.audit.index);
 
 // app.get('/api/campaigns/testCreate', server.auth.required, routes.campaign.api.testCreate);
 // app.get('/api/campaigns/:id/testCreateDocument', server.auth.required, routes.campaign.api.testCreateDocument);
+app.get('/api/campaigns/:id/notifications/testCreate', server.auth.required, routes.campaign.api.testCreateNotification);
+app.get('/api/settings', server.auth.required, routes.settings.api.list);
+app.post('/api/settings', server.auth.required, routes.settings.api.update);
 app.get('/api/campaigns', server.auth.required, routes.campaign.api.list);
 app.get('/api/campaigns/:id', server.auth.required, routes.campaign.api.get);
 app.post('/api/campaigns', server.auth.required, routes.campaign.api.create);
+app.post('/api/campaigns/:id/notifications', server.auth.required, routes.campaign.api.createNotification);
 app.post('/api/campaigns/:id/documents', server.auth.required, routes.campaign.api.createDocument);
 app.get('/api/campaigns/:id/documents', server.auth.required, routes.campaign.api.listDocuments);
 app.get('/api/campaigns/:id/documents/:document_id', server.auth.required, routes.campaign.api.getDocument);

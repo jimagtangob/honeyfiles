@@ -71,7 +71,7 @@ function list(req, res, next) {
 function listDocuments(req, res, next) {
 
   models.Campaign
-  .find({ id: req.params.id })
+  .find(req.params.id)
   .success(function(campaign) { 
 
     if (!campaign) {
@@ -222,6 +222,40 @@ api.createDocument = function(req, res) {
    });
 
 };
+
+api.createNotification = function(req, res) {
+  var email = req.body.email;
+
+  models.Campaign
+   .find({ id: req.params.id })
+   .success(function(campaign) { 
+
+     if (!campaign) return res.send(404);
+
+     var options = {
+        user: req.user,
+        email: req.body.email
+     };
+
+     campaign.createNotification(options, function(err, notification) {
+       if (err) {
+         console.error("unable to create notification", err);
+         return res.send(500);
+       }
+     
+       res.send({ status: 'success', notification: notification })
+     });
+   })
+   .error(function(err) {
+      console.error("unable to create notification", err);
+      return res.send(500);
+   });
+};
+
+api.testCreateNotification = function(req, res) {
+  req.body.email = 'jen.andre@threatstack.com';
+  api.createNotification(req, res);
+}
 
 
 api.testCreate = function(req, res) {

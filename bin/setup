@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var models = require('../lib/server/models');
+var config = require('../lib/server/config');
 var argv = require('optimist').argv;
 
 var setupUser = function(username, pass) {
@@ -15,4 +16,14 @@ var setupUser = function(username, pass) {
   });
 };
 
-if (argv.user && argv.pass) setupUser(argv.user, argv.pass);
+var setValue = function(key, value) {
+  config.update({ key: key, value: value });
+};
+
+config.on('ready', function() {
+
+  if (argv.user && argv.pass) setupUser(argv.user, argv.pass);
+
+  if (argv.setting) setValue(argv.key, argv.value);
+});
+config.load();
